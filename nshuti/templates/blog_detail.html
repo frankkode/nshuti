@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <main id="main" style="padding-top:50px ;">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h4><a href="/blog" class="btn-service"> << Back to Blog</a></h2>
+     
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Details Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row g-5">
+          
+          <div class="col-lg-10">
+            
+            <article class="blog-details">
+
+              <div class="post-img">
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }} " class="img-fluid">
+              </div>
+
+              <h2 class="title">{{ blog.title|safe }}</h2>
+
+              <div class="meta-top">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{ blog.author|safe }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{ blog.created_at|safe}}</time></a></li>
+                  
+                </ul>
+              </div><!-- End meta top -->
+
+              <div class="content">
+                <p>
+                  {{ blog.content|safe}}
+                </p>
+
+              </div><!-- End post content -->
+
+
+            </article><!-- End blog post -->
+           
+            <div class="post-author d-flex align-items-center">
+              <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
+              <div>
+                <h4>{{ blog.author|safe }}</h4>
+                <div class="social-links">
+                  <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+                  <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                  <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+                </div>
+                <p>
+                  Nshuti is a Phd student at UCAM catholic University of Murcia Spain .a highly innovative and deadline-driven electrical engineer with more than 10 years of experience designing,developing maintaining,Imprementing and researching electrical systems, energy solutions, and emerging technologies.
+                </p>
+              </div>
+            </div><!-- End post author -->
+           
+          
+              <!-- End blog comments -->
+
+          </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Blog Details Section -->
+
+  </main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Nshuti</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/ -->
+       <a href="https://bootstrapmade.com/"></a>
+    </div>
+  </div>
+</footer><!-- End  Footer -->
+
+  {% endblock content %}

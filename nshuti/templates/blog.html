@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <main id="main" style="padding-top:30px ;">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs align-items-center">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <h2 class="center align-items-center">Blog</h2>
+   
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row g-5">
+
+          <div class="col-lg-12">
+
+            <div class="row gy-4 posts-list">
+              {% for blog in posts %}
+              <div class="col-lg-6">
+                <article class="d-flex flex-column">
+
+                  <div class="post-img">
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }} " class="img-fluid">
+                  </div>
+
+                  <h2 class="title">
+                    <a href="{% url 'blog_detail' blog.id %}">{{ blog.title|safe }}</a>
+                  </h2>
+
+                  <div class="meta-top">
+                    <ul>
+                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">{{ blog.author|safe }}</a></li>
+                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2022-01-01">{{ blog.created_at|safe}}</time></a></li>
+                    </ul>
+                  </div>
+
+                  <div class="content">
+                    <p>
+                      {{ blog.content|safe|truncatechars:300}}
+                    </p>
+                  </div>
+
+                  <div class=" ">
+                    <a class="btn-service" href="{% url 'blog_detail' blog.id %}">Read More</a>
+                  </div>
+
+                </article>
+              </div><!-- End post list item -->
+              {% endfor %}
+              
+
+            </div><!-- End blog posts list -->
+
+            
+            {% if posts.has_other_pages %}
+            <div class="pagination">
+                {% if posts.has_previous %}
+                    <a href="?page={{ posts.previous_page_number }}">&laquo; previous</a>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                    {% if posts.number == i %}
+                        <span class="page-link current-page m-1 ">{{ i }}</span>
+                    {% else %}
+                        <a href="?page={{ i }}" class="page-link m-1">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}">next &raquo;</a>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+  <!-- End blog pagination -->
+
+          </div>
+
+          
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+
+  </main><!-- End #main -->
+
+ <!-- ======= Footer ======= -->
+ <footer id="footer">
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Nshuti</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/ -->
+       <a href="https://bootstrapmade.com/"></a>
+    </div>
+  </div>
+</footer><!-- End  Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+  {% endblock content %}
