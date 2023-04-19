@@ -12,5 +12,4 @@ urlpatterns = [
      path('cv/', views.download_cv, name='download_cv'),
      path('resume', views.resume, name='resume'),
      path('services', views.services, name='services'),
-     path('tinymce/', include('tinymce.urls')),
 ]

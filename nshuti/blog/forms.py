@@ -1,6 +1,6 @@
 from django import forms
 from .models import Blog
-from tinymce.widgets import TinyMCE
+
 
 
 class ContactForm(forms.Form):
@@ -13,6 +13,4 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['title', 'image', 'content']
-        widgets = {
-            'content': TinyMCE(attrs={'cols': 80, 'rows': 10}),
-        }
+       

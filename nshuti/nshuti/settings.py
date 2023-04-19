@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog",
-    "tinymce",
+    "ckeditor",
     "storages",
 ]
 
@@ -136,58 +136,40 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 #USE_S3 = os.getenv('USE_S3') == 'TRUE' use this when u want to run local
-USE_S3 = 'TRUE'
-if USE_S3:
-    # aws settings
-    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_REGION_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    # s3 static settings
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
-    STATIC_URL = '/staticfiles/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#aws
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'),]
+VENV_PATH = os.path.dirname(BASE_DIR)
+STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
+MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT', 
+    'CacheControl': 'max-age=94608000', 
+    }
+    
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = 'eu-north-1'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_DEFAULT_ACL = None
+AWS_S3_FILE_EVERWRITE = False
 
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
-TINYMCE_DEFAULT_CONFIG = {
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
-   'height': 360,
-   'width': 750,
-   'cleanup_on_startup': True,
-   'custom_undo_redo_levels': 20,
-   'selector': 'textarea',
-   'theme': 'modern',
-   'plugins': '''
-   textcolor save link image media preview codesample contextmenu
-   table code lists fullscreen insertdatetime nonbreaking
-   contextmenu directionality searchreplace wordcount visualblocks
-   visualchars code fullscreen autolink lists charmap print hr
-   anchor pagebreak
-   ''',
-   'toolbar1': '''
-   fullscreen preview bold italic underline | fontselect,
-   fontsizeselect | forecolor backcolor | alignleft alignright |
-   aligncenter alignjustify | indent outdent | bullist numlist table |
-   | link image media | codesample |
-   ''',
-   'toolbar2': '''
-   visualblocks visualchars |
-   charmap hr pagebreak nonbreaking anchor | code |
-   ''',
-   'contextmenu': 'formats | link image',
-   'menubar': True,
-   'statusbar': True,
-   }
+MEDIAFILES_LOCATION ='media'
+DEFAULT_FILE_STORAGE ='custom_storages.MediaStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field.
 

@@ -34,7 +34,7 @@
                   </div>
 
                   <h2 class="title">
-                    <a href="{% url 'blog_detail' blog.id %}">{{ blog.title|safe }}</a>
+                    <a href="{% url 'blog_detail' blog.id %}">{{ blog.title|safe|truncatechars:80 }}</a>
                   </h2>
 
                   <div class="meta-top">
