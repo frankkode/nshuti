@@ -37,10 +37,6 @@ h6 {
 .h2-stl{
   color: #c3c3c3;
   background: transparent;
-  border-color: #737474;
-  border-style: double;
-  border-width: 3px;
-  border-radius: 12px;
 }
 #main {
   margin-top: 50px;
