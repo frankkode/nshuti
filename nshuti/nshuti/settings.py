@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING:don't run with debug, turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://nshutih.com','https://www.nshutih.com','nshutih.com','https://nshuti.up.railway.app/','localhost']
+ALLOWED_HOSTS = ['https://nshutih.com','https://www.nshutih.com','www.nshutih.com','nshutih.com','https://nshuti.up.railway.app/','localhost']
 
 # Application definition
 
