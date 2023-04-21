@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['https://nshutih.com','https://www.nshutih.com','www.nshutih.com','nshutih.com','https://nshuti.up.railway.app/','localhost','nshuti.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://nshutih.com','https://*.nshutih.com','https://nshuti.up.railway.app/','nshuti.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://nshutih.com','https://*.nshutih.com','https://nshuti.up.railway.app/']
 # Application definition
 
 INSTALLED_APPS = [
